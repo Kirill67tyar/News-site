@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% load mptt_tags %}<!-- Теги из mptt-->
+<ul>
+    {% recursetree rubrics %}<!-- мпттшный тег. Возможно что-то связано с рекурсией-->
+        <li>
+            <a href="{{ node.get_absolute_url }}">{{ node.name }}</a><!-- этот node - это что-то вроде цикла (переводится как узел). Синтаксис непривычный
+                                name - это аттрибут объета node, скорее всего поле модели Rubric-->
+
+            {% if not node.is_leaf_node %} <!-- node.is_leaf_node - True, когда рубрика не имеет вложенностей
+                                            а ее lft и rght слежуют друг за другом (rght - lft = 1)-->
+
+                <ul class="children"><!-- обрати внимание на класс children-->
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}<!-- Закрывающий тег-->
+</ul>
+</body>
+</html>

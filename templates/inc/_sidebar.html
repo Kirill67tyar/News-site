@@ -1,0 +1,24 @@
+{% load news_tags %}
+
+{% comment %}
+<div class="list-group">
+{% get_list_categories as categories %}
+        {% for category in categories %}
+
+<a href="{% url 'news:category' category.pk %}" class="list-group-item list-group-item-action">
+    {{category.title}}
+</a>
+<!--<a href="/first/index/category/{{category.pk}}/" class="list-group-item list-group-item-action"></a>-->
+
+        {% endfor %}
+
+
+</div>
+{% endcomment %}
+
+
+
+<!--тег определенный нами в news/templatetags/new_tags.py-->
+{% show_categories arg2='User' arg1='Hi' %}
+
+

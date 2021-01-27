@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{news_item.title}}
+{% endblock %}
+
+
+{% block sidebar %}
+
+       {% include 'inc/_sidebar.html' %}
+
+{% endblock %}
+
+
+{% block content %}
+
+
+
+        <div class="card mb-3">
+              <div class="card-header">
+                  <!--{ item.my_func } функция из модели-->
+                Категория:<a href="{{ news_item.category.get_absolute_url }}"> {{news_item.category.title}}</a>
+              </div>
+              <div class="card-body">
+
+                      {% if news_item.photo %}
+                      <img src="{{news_item.photo.url}}" alt="" width="200" class="float-left mr-3">
+                      {% else %}
+                      <img src="https://picsum.photos/id/237/354/354" alt="" width="200" class="float-left mr-3">
+                      {% endif %}
+
+                          <h5 class="card-title {% cycle 'text-danger' 'text-success' %}">{{news_item.title}}</h5>
+
+                          <p class="card-text">{{news_item.content|safe|linebreaks}}</p>
+
+
+
+
+
+              </div>
+              <div class="card-footer text-muted">
+                {{ news_item.created_it|timesince}} <!-- попробуй фильтр timesince вместо date:'Y-m-d H:i:s'-->
+              </div>
+        </div>
+    <p class="h4"><a href="{% url 'news:home' %}" class="btn btn-outline-success my-2 my-sm-0">Назад ко всем новостям</a> </p>
+
+
+{% endblock %}
